@@ -13,19 +13,19 @@ DefuzzMethod='centroid'
 
 [Input1]
 Name='Temperature'
-Range=[30 40]
+Range=[30 42]
 NumMFs=4
-MF1='Low':'trapmf',[26.7 29.12 31 33]
+MF1='Low':'trapmf',[26.04 28.94 31 33]
 MF2='Elevated':'trapmf',[34 36 37 39]
-MF3='Dangerous':'trapmf',[37 39 40.42 43.75]
+MF3='Dangerous':'trapmf',[37 39 42.5 46.5]
 MF4='Normal':'trapmf',[31 33 34 36]
 
 [Input2]
 Name='Redness'
 Range=[0 1]
 NumMFs=2
-MF1='Normal':'trapmf',[-0.375 -0.04167 0.2 0.5]
-MF2='Flushed':'trapmf',[0.2 0.5 1 1]
+MF1='Normal':'trapmf',[-0.375 -0.04167 0.2 0.4]
+MF2='Flushed':'trapmf',[0.2 0.4 1 1]
 
 [Output1]
 Name='Risk_level'

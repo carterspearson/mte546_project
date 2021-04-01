@@ -72,6 +72,27 @@ plot(T,intensity)
 ylabel('Skin Intensity')
 xlabel('time (s)')
 
+%% Run fuzzy model
+
+fis = readfis('fuzzy_model')
+for i=1:len
+    %Simulating Object Motion and Sensors
+    
+    v = R*randn(1);
+    w = Q*randn(1);
+    u = S*randn(1);
+    
+    resist1(i) = r(i*dt)+w;
+    temp1(i) = t(resist1(i))+v;
+    
+    resist2(i) = 6850+u;
+    temp2(i) = t(resist2(i))+v;
+    
+    intensity(i) = e(i*dt)+u;
+end
+output = evalfis(fis, [
+
+%% Functions
 
 function T = r(X)
     x = X;

@@ -1,7 +1,7 @@
 clear all;
 clc;
 
-dt = 0.01;
+dt = 1;
 %4hrs in seconds
 Tf = 14400;
 %Tf = 30;
@@ -51,27 +51,49 @@ xx2 =[0 0 0 0 0 0 0 0 0 0 0];
 plot(xx,yy);
 p = polyfit(xx,yy,3);
 %}
-subplot(4,1,1)
-plot(T,temp1)
+% subplot(4,1,1)
+% plot(T,temp1)
+% ylabel('temp sensor 1')
+% %xlim([5000 Tf])
+% 
+% subplot(4,1,2)
+% plot(T,temp2)
+% ylabel('temp sensor 2')
+% test = r(2);
+% 
+% subplot(4,1,3)
+% plot(T,temp1-temp2)
+% ylabel('temp diff')
+% xlabel('time (s)')
+% 
+% 
+% subplot(4,1,4)
+% plot(T,intensity)
+% ylabel('Skin Intensity')
+% xlabel('time (s)')
+
+%% Run fuzzy model
+
+fis = readfis('fuzzy_model')
+fuzzy_logic_output = zeros(1,len);
+
+for i=1:len
+    fuzzy_logic_output(i) = evalfis(fis, [temp1(i), intensity(i)]);
+end
+
+subplot(3,1,1)
+plot(T, temp1)
 ylabel('temp sensor 1')
-%xlim([5000 Tf])
 
-subplot(4,1,2)
-plot(T,temp2)
-ylabel('temp sensor 2')
-test = r(2);
+subplot(3,1,2)
+plot(T, intensity)
+ylabel('Intensity')
 
-subplot(4,1,3)
-plot(T,temp1-temp2)
-ylabel('temp diff')
-xlabel('time (s)')
+subplot(3,1,3)
+plot(T, fuzzy_logic_output)
+ylabel('Risk level')
 
-
-subplot(4,1,4)
-plot(T,intensity)
-ylabel('Skin Intensity')
-xlabel('time (s)')
-
+%% Functions
 
 function T = r(X)
     x = X;
